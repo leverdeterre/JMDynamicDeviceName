@@ -22,7 +22,7 @@ pod "JMDynamicDeviceName"
 
 ## Author
 
-Jerome Morissard, jerome.morissard@backelite.com
+Jerome Morissard, morissardj@gmail.com
 
 ## License
 

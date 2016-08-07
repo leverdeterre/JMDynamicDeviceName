@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CF811CD72A47F7994A91C13A9EC1AD14'
-               BlueprintName = 'JMDynamicDeviceName'
+               BlueprintIdentifier = 'FCE89170A801EB54DC9A9E702D1EC9BA'
+               BlueprintName = 'JMDynamicDeviceName-JMDynamicDeviceName'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'JMDynamicDeviceName.framework'>
+               BuildableName = 'JMDynamicDeviceName.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

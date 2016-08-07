@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>JMDynamicDeviceName-JMDynamicDeviceName.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JMDynamicDeviceName.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23029AE3017DE03645839D08FFD2EF64</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>33360B1E3422E25E42BBB015CD1A64FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>701E387ADEAAA4DD953F50D89E3CAEF0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF811CD72A47F7994A91C13A9EC1AD14</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCE89170A801EB54DC9A9E702D1EC9BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

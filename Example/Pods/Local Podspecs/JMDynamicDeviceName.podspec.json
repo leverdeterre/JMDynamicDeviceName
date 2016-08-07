@@ -3,20 +3,26 @@
   "version": "0.1.0",
   "summary": "A short description of JMDynamicDeviceName.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/JMDynamicDeviceName",
+  "homepage": "https://github.com/leverdeterre/JMDynamicDeviceName",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Jerome Morissard": "jerome.morissard@backelite.com"
+    "Jerome Morissard": "morissardj@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/JMDynamicDeviceName.git",
+    "git": "https://github.com/leverdeterre/JMDynamicDeviceName.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "JMDynamicDeviceName/Classes/**/*"
+  "source_files": "JMDynamicDeviceName/Classes/**/*",
+  "resource_bundles": {
+    "JMDynamicDeviceName": [
+      "JMDynamicDeviceName/Assets/*.png"
+    ]
+  },
+  "frameworks": "UIKit"
 }
