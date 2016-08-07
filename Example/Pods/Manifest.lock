@@ -1,0 +1,16 @@
+PODS:
+  - JMDynamicDeviceName (0.1.0)
+
+DEPENDENCIES:
+  - JMDynamicDeviceName (from `../`)
+
+EXTERNAL SOURCES:
+  JMDynamicDeviceName:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JMDynamicDeviceName: 7adaa3a0d9249fe40b68396c7d49a2fd6bfa8d37
+
+PODFILE CHECKSUM: bcba5a8cd59c8fd1ee83a8a32cd3793939d26cfc
+
+COCOAPODS: 1.0.1

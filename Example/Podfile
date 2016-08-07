@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JMDynamicDeviceName_Example' do
+  pod 'JMDynamicDeviceName', :path => '../'
+
+  target 'JMDynamicDeviceName_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
