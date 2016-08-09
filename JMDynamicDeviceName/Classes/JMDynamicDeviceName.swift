@@ -14,10 +14,32 @@ let userDefaultJSONKey = "JMDynamicDeviceName.ios-models.json"
 
 public class JMDeviceName {
 
-    private static var cachedDeviceName: String?
-    private static var cachedDeviceFamilyName: String?
+    lazy var deviceName: String = self.initializeDeviceName()
+    lazy var deviceFamilyName: String = self.initializeDeviceFamilyName()
 
-    class func platform() -> String {
+    func initializeDeviceName() -> String {
+        let sysName = platform()
+        var json = JMDeviceName.moreUpToDateJSON()
+        if let systemInformations = json[sysName] {
+            if let name = systemInformations["name"] {
+                return name
+            }
+        }
+        return "iPhone Simulator"
+    }
+    
+    func initializeDeviceFamilyName() -> String {
+        let sysName = platform()
+        var json = JMDeviceName.moreUpToDateJSON()
+        if let systemInformations = json[sysName] {
+            if let name = systemInformations["familyName"] {
+                return name
+            }
+        }
+        return "iPhone Simulator"
+    }
+
+    func platform() -> String {
         var size : Int = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)
         var machine = [CChar](count: Int(size), repeatedValue: 0)
@@ -25,69 +47,44 @@ public class JMDeviceName {
         return String.fromCString(machine)!
     }
     
-    public class func deviceName(systemName: String) -> String {
-        loadJSON(systemName)
-        let deviceName = cachedDeviceName
-        cachedDeviceName = nil
-        cachedDeviceFamilyName = nil
-        return deviceName!
-    }
-    
-    public class func deviceName() -> String {
-        if (cachedDeviceName != nil) {
-            return cachedDeviceName!
+    class func moreUpToDateJSON() -> [String:[String:String]] {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        var json: [String:[String:String]]?
+        json = (userDefault.objectForKey(userDefaultJSONKey) as? [String:[String:String]])
+        if let json = json {
+            return json
+        
+        } else {
+            let jmBundle = NSBundle(forClass: self)
+            var filePath = jmBundle.pathForResource("JMDynamicDeviceName.bundle/ios-models", ofType: "json")
+            let data = NSData(contentsOfFile:filePath!)
+            json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
+            if let json = json {
+                return json
+            }
         }
         
-        loadJSON()
-        return cachedDeviceName!
+        return [String:[String:String]]()
+    }
+    
+    public class func deviceName(systemName: String) -> String {
+        var json = moreUpToDateJSON()
+        if let systemInformations = json[systemName] {
+            if let name = systemInformations["name"] {
+                return name
+            }
+        }
+        return "iPhone Simulator"
     }
     
     public class func deviceFamilyName(systemName: String) -> String {
-        loadJSON(systemName)
-        let deviceFamilyName = cachedDeviceFamilyName
-        cachedDeviceName = nil
-        cachedDeviceFamilyName = nil
-        return deviceFamilyName!
-    }
-    
-    public class func deviceFamilyName() -> String {
-        if (cachedDeviceFamilyName != nil) {
-            return cachedDeviceFamilyName!
+        var json = moreUpToDateJSON()
+        if let systemInformations = json[systemName] {
+            if let name = systemInformations["familyName"] {
+                return name
+            }
         }
-        
-        loadJSON()
-        return cachedDeviceFamilyName!
-    }
-    
-    
-    class func loadJSON(systemName: String){
-        let userDefault = NSUserDefaults()
-        var json: [String:[String:String]]?
-        json = (userDefault.objectForKey(userDefaultJSONKey) as? [String:[String:String]])
-        
-        if (json == nil) {
-            var filePath = NSBundle.mainBundle().pathForResource("JMDynamicDeviceName", ofType: "bundle")
-            let jmBundle = NSBundle(forClass: self)
-            filePath = jmBundle.pathForResource("ios-models", ofType: "json")
-            let data = NSData(contentsOfFile:filePath!)
-            json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
-            userDefault.setObject(json, forKey: userDefaultJSONKey)
-        }
-
-        var system = json![systemName]
-        if (system == nil) {
-            cachedDeviceName = "iPhone Simulator"
-            cachedDeviceFamilyName = "iPhone Simulator"
-            
-        } else {
-            cachedDeviceName = system!["name"]!
-            cachedDeviceFamilyName = system!["familyName"]!
-        }
-    }
-    
-    class func loadJSON(){
-        let sysName = platform()
-        loadJSON(sysName)
+        return "iPhone Simulator"
     }
 }
 
@@ -95,7 +92,7 @@ public class JMDeviceName {
 
 extension JMDeviceName {
     
-    public class func getLastModifiedDate (completionBlock: (str: String?) -> Void) -> Void {
+    public class func getLastModifiedDate (then: (str: String?) -> Void) -> Void {
         let mRequest = NSMutableURLRequest(URL: NSURL(string: githubProjectPath)!)
         mRequest.HTTPMethod = "HEAD"
         
@@ -103,12 +100,12 @@ extension JMDeviceName {
         let task = urlSession.downloadTaskWithRequest(mRequest) { (url, response, error) in
             let urlHttpResponse = response as! NSHTTPURLResponse
             let lastModifiedField = urlHttpResponse.allHeaderFields["Last-Modified"]
-            completionBlock(str: (lastModifiedField as? String))
+            then(str: (lastModifiedField as? String))
         }
         task.resume()
     }
     
-    public class func getGithubJson (completionBlock: (dict: [String : [String:String]]?) -> Void) -> Void {
+    public class func getGithubJson (then: (dict: [String : [String:String]]?) -> Void) -> Void {
         let mRequest = NSMutableURLRequest(URL: NSURL(string: githubProjectPath)!)
         mRequest.HTTPMethod = "GET"
         
@@ -116,13 +113,13 @@ extension JMDeviceName {
         let task = urlSession.dataTaskWithRequest(mRequest) { (data, response, error) in
             let json: [String:[String:String]]
             json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
-            completionBlock(dict: json)
+            then(dict: json)
         }
         task.resume()
     }
     
     public class func checkForUpdate (){
-        let userDefault = NSUserDefaults()
+        let userDefault = NSUserDefaults.standardUserDefaults()
         if (userDefault.objectForKey(userDefaultLastModifiedKey) == nil) {
             getLastModifiedDate({ (lastModifiedString) in
                 getGithubJson({ (jsonDict) in

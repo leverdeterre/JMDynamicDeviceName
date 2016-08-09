@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JMDynamicDeviceName: 0ca7196e04bdbac9000a40bae3c650f73460b6d1
+  JMDynamicDeviceName: 8b60aade662cb56ed12e8cc51b23d5e3f1fab292
 
 PODFILE CHECKSUM: bcba5a8cd59c8fd1ee83a8a32cd3793939d26cfc
 

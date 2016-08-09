@@ -21,7 +21,7 @@
   "source_files": "JMDynamicDeviceName/Classes/**/*",
   "resource_bundles": {
     "JMDynamicDeviceName": [
-      "JMDynamicDeviceName/Assets/*.png"
+      "JMDynamicDeviceName/Assets/*.json"
     ]
   },
   "frameworks": "UIKit"

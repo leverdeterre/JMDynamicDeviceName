@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   s.source_files = 'JMDynamicDeviceName/Classes/**/*'
   
   s.resource_bundles = {
-    'JMDynamicDeviceName' => ['JMDynamicDeviceName/Assets/*.png']
+    'JMDynamicDeviceName' => ['JMDynamicDeviceName/Assets/*.json']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
