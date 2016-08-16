@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JMDynamicDeviceName'
-  s.version          = '0.9'
+  s.version          = '0.9.1'
   s.summary          = 'JMDynamicDeviceName is a library to avoid application update for each new Apple devices.'
   s.description      = <<-DESC
 Each devices has a id (like "iPad6,7") when doing analytics it's more simple to manipulate real names (like "iPad Pro (WiFi)")
@@ -19,7 +19,7 @@ And it's my first Swift lib !
   s.homepage         = 'https://github.com/leverdeterre/JMDynamicDeviceName'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jerome Morissard' => 'morissardj@gmail.com' }
-  s.source           = { :git => 'https://github.com/leverdeterre/JMDynamicDeviceName.git', :tag => '0.9' }
+  s.source           = { :git => 'https://github.com/leverdeterre/JMDynamicDeviceName.git', :tag => '0.9.1' }
   # s.social_media_url = 'https://twitter.com/leverdeterre'
 
   s.ios.deployment_target = '8.0'
