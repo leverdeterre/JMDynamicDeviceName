@@ -10,8 +10,9 @@ import UIKit
 import JMDynamicDeviceName
 
 class MasterViewController: UITableViewController {
-
+    
     var objects = [
+        "x86_64",
         "iPhone1,1",
         "iPhone1,2",
         "iPhone2,1",
@@ -68,9 +69,12 @@ class MasterViewController: UITableViewController {
         "iPad6,7",
         "iPad6,8"]
 
+    var myDeviceMachineName :String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        myDeviceMachineName = JMDeviceName.deviceMachineName()
         JMDeviceName.checkForUpdate()
     }
 
@@ -89,6 +93,9 @@ class MasterViewController: UITableViewController {
 
         let object = objects[indexPath.row]
         cell.textLabel!.text = JMDeviceName.deviceName(object)
+        if objects[indexPath.row] == myDeviceMachineName {
+            cell.backgroundColor = UIColor.blueColor()
+        }
         return cell
     }
 

@@ -18,7 +18,7 @@ public class JMDeviceName {
     lazy var deviceFamilyName: String = self.initializeDeviceFamilyName()
 
     func initializeDeviceName() -> String {
-        let sysName = platform()
+        let sysName = JMDeviceName.deviceMachineName()
         var json = JMDeviceName.moreUpToDateJSON()
         if let systemInformations = json[sysName] {
             if let name = systemInformations["name"] {
@@ -29,7 +29,7 @@ public class JMDeviceName {
     }
     
     func initializeDeviceFamilyName() -> String {
-        let sysName = platform()
+        let sysName = JMDeviceName.deviceMachineName()
         var json = JMDeviceName.moreUpToDateJSON()
         if let systemInformations = json[sysName] {
             if let name = systemInformations["familyName"] {
@@ -39,7 +39,7 @@ public class JMDeviceName {
         return "iPhone Simulator"
     }
 
-    func platform() -> String {
+    class public func deviceMachineName() -> String {
         var size : Int = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)
         var machine = [CChar](count: Int(size), repeatedValue: 0)
@@ -74,7 +74,7 @@ public class JMDeviceName {
                 return name
             }
         }
-        return "iPhone Simulator"
+        return systemName
     }
     
     public class func deviceFamilyName(systemName: String) -> String {
@@ -84,7 +84,7 @@ public class JMDeviceName {
                 return name
             }
         }
-        return "iPhone Simulator"
+        return systemName
     }
 }
 
@@ -98,9 +98,14 @@ extension JMDeviceName {
         
         let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         let task = urlSession.downloadTaskWithRequest(mRequest) { (url, response, error) in
-            let urlHttpResponse = response as! NSHTTPURLResponse
-            let lastModifiedField = urlHttpResponse.allHeaderFields["Last-Modified"]
-            then(str: (lastModifiedField as? String))
+            if let myResponse = response {
+                let urlHttpResponse = myResponse as! NSHTTPURLResponse
+                let lastModifiedField = urlHttpResponse.allHeaderFields["Last-Modified"]
+                then(str: (lastModifiedField as? String))
+                
+            } else {
+                then(str: nil)
+            }
         }
         task.resume()
     }
@@ -111,9 +116,14 @@ extension JMDeviceName {
         
         let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         let task = urlSession.dataTaskWithRequest(mRequest) { (data, response, error) in
-            let json: [String:[String:String]]
-            json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
-            then(dict: json)
+            if let myResponse = response {
+                let json: [String:[String:String]]
+                json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
+                then(dict: json)
+                
+            } else {
+                then(dict: nil)
+            }
         }
         task.resume()
     }
@@ -139,6 +149,7 @@ extension JMDeviceName {
                         if lastModifiedString != nil
                             && jsonDict != nil
                         {
+                            print("JMDeviceName.checkForUpdate -> json model update done")
                             userDefault.setObject(lastModifiedString, forKey: userDefaultLastModifiedKey)
                             userDefault.setObject(jsonDict, forKey: userDefaultJSONKey)
                         }
