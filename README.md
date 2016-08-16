@@ -9,20 +9,14 @@
 
 Keeping iOS devices names up-to-date in your application without updating your pods :)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
 ## Installation
 
-JMDynamicDeviceName is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+add the following line to your Podfile:
 
 ```ruby
 pod "JMDynamicDeviceName"
 ```
+
 ## Usage
 
 ```swift
