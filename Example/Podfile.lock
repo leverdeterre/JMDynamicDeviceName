@@ -1,5 +1,5 @@
 PODS:
-  - JMDynamicDeviceName (0.1.0)
+  - JMDynamicDeviceName (0.9)
 
 DEPENDENCIES:
   - JMDynamicDeviceName (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JMDynamicDeviceName: 8b60aade662cb56ed12e8cc51b23d5e3f1fab292
+  JMDynamicDeviceName: e9fa278a584ee44697489bcef197d88824efdfd2
 
 PODFILE CHECKSUM: bcba5a8cd59c8fd1ee83a8a32cd3793939d26cfc
 

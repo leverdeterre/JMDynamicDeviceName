@@ -56,7 +56,7 @@ public class JMDeviceName {
         
         } else {
             let jmBundle = NSBundle(forClass: self)
-            var filePath = jmBundle.pathForResource("JMDynamicDeviceName.bundle/ios-models", ofType: "json")
+            let filePath = jmBundle.pathForResource("JMDynamicDeviceName.bundle/ios-models", ofType: "json")
             let data = NSData(contentsOfFile:filePath!)
             json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
             if let json = json {
@@ -116,9 +116,9 @@ extension JMDeviceName {
         
         let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         let task = urlSession.dataTaskWithRequest(mRequest) { (data, response, error) in
-            if let myResponse = response {
+            if let myData = data {
                 let json: [String:[String:String]]
-                json = try!NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments) as! [String:[String:String]]
+                json = try!NSJSONSerialization.JSONObjectWithData(myData, options:.AllowFragments) as! [String:[String:String]]
                 then(dict: json)
                 
             } else {
