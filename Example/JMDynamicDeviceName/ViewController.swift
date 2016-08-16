@@ -95,6 +95,8 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = JMDeviceName.deviceName(object)
         if objects[indexPath.row] == myDeviceMachineName {
             cell.backgroundColor = UIColor.blueColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
         }
         return cell
     }
