@@ -276,22 +276,22 @@
     },
     "iPhone9,1" :
     {
-        "name" : "iPhone 7",
+        "name" : "iPhone 7 (CDMA+GSM/LTE)",
         "familyName" : "iPhone 7"
     },
     "iPhone9,3" :
     {
-        "name" : "iPhone 7",
+        "name" : "iPhone 7 (GSM/LTE)",
         "familyName" : "iPhone 7"
     },
     "iPhone9,2" :
     {
-        "name" : "iPhone 7 Plus",
+        "name" : "iPhone 7 Plus (CDMA+GSM/LTE)",
         "familyName" : "iPhone 7 Plus"
     },
     "iPhone9,4" :
     {
-        "name" : "iPhone 7 Plus",
+        "name" : "iPhone 7 Plus (GSM/LTE)",
         "familyName" : "iPhone 7 Plus"
     } 
 }
