@@ -273,5 +273,25 @@
     {
         "name" : "iPad Pro (Cellular)",
         "familyName" : "iPad Pro"
-    }
+    },
+    "iPhone9,1" :
+    {
+        "name" : "iPhone 7",
+        "familyName" : "iPhone 7"
+    },
+    "iPhone9,3" :
+    {
+        "name" : "iPhone 7",
+        "familyName" : "iPhone 7"
+    },
+    "iPhone9,2" :
+    {
+        "name" : "iPhone 7 Plus",
+        "familyName" : "iPhone 7 Plus"
+    },
+    "iPhone9,4" :
+    {
+        "name" : "iPhone 7 Plus",
+        "familyName" : "iPhone 7 Plus"
+    } 
 }
